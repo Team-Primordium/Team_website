@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primordium Digital Intelligence Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6d28d9',
+                        secondary: '#8b5cf6',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-in',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #8b5cf6, #6d28d9);
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #8b5cf6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hexagon {
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #8b5cf6;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #8b5cf6; }
+        }
+    </style>
+</head>
+<body class="bg-dark text-light font-sans">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-dark/90 backdrop-blur-md z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="hexagon w-10 h-10 bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">P</span>
+                        </div>
+                        <span class="ml-3 text-xl font-bold gradient-text">Primordium</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#ctf" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">CTF Team</a>
+                        <a href="#minecraft" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Minecraft</a>
+                        <a href="#blog" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                        <a href="#contact" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark/95 backdrop-blur-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">About</a>
+                <a href="#ctf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">CTF Team</a>
+                <a href="#minecraft" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Minecraft</a>
+                <a href="#blog" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Blog</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    <span class="gradient-text">Primordium</span> Digital Intelligence
+                </h1>
+                <p class="text-xl text-gray-300 mb-8">
+                    Empowering the next generation through cybersecurity education, creative technology, and collaborative learning.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#about" class="px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-md text-white font-medium hover:opacity-90 transition duration-300">
+                        Learn More
+                    </a>
+                    <a href="#contact" class="px-6 py-3 border border-secondary text-white rounded-md font-medium hover:bg-secondary/10 transition duration-300">
+                        Get Involved
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative">
+                <div class="hexagon w-64 h-72 md:w-80 md:h-96 mx-auto bg-gradient-to-br from-primary/20 to-secondary/20 relative">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="hexagon w-56 h-64 md:w-72 md:h-80 bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center">
+                            <div class="hexagon w-48 h-56 md:w-64 md:h-72 bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                                <i class="fas fa-lock text-white text-6xl md:text-8xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-10 -left-10 w-24 h-24 rounded-full bg-primary/20 blur-xl"></div>
+                <div class="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-secondary/20 blur-xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gray-900/50 rounded-3xl my-10">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">Our Mission</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                We are a collective of passionate individuals dedicated to democratizing access to cybersecurity knowledge and creative technology education.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 card-hover">
+                <div class="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-shield-alt text-primary text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Cybersecurity Education</h3>
+                <p class="text-gray-300">
+                    We provide hands-on training in cybersecurity through Capture The Flag competitions, workshops, and mentorship programs.
+                </p>
+            </div>
+            
+            <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 card-hover">
+                <div class="w-16 h-16 bg-secondary/10 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-graduation-cap text-secondary text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Creative Learning</h3>
+                <p class="text-gray-300">
+                    Our Minecraft Education initiative teaches programming, logic, and teamwork through immersive game-based learning.
+                </p>
+            </div>
+            
+            <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 card-hover">
+                <div class="w-16 h-16 bg-purple-500/10 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-users text-purple-500 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Community Building</h3>
+                <p class="text-gray-300">
+                    We foster a supportive community where learners of all levels can grow, collaborate, and innovate together.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTF Team Section -->
+    <section id="ctf" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">Our CTF Team</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                Competing in cybersecurity challenges worldwide, our team develops skills in reverse engineering, cryptography, web exploitation, and more.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gradient-to-br from-dark to-gray-900 p-8 rounded-xl border border-gray-800 card-hover">
+                <h3 class="text-2xl font-bold mb-4">Recent Achievements</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mt-1">
+                            <i class="fas fa-trophy text-primary text-xs"></i>
+                        </div>
+                        <p class="ml-3 text-gray-300">1st Place - National Cybersecurity Challenge 2023</p>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mt-1">
+                            <i class="fas fa-medal text-primary text-xs"></i>
+                        </div>
+                        <p class="ml-3 text-gray-300">Top 10% - Global CTF Competition 2023</p>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center mt-1">
+                            <i class="fas fa-star text-primary text-xs"></i>
+                        </div>
+                        <p class="ml-3 text-gray-300">Best Newcomer Team - HackTheBox University CTF</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="bg-gradient-to-br from-dark to-gray-900 p-8 rounded-xl border border-gray-800 card-hover">
+                <h3 class="text-2xl font-bold mb-4">Join Our Team</h3>
+                <p class="text-gray-300 mb-6">
+                    We're always looking for passionate individuals interested in cybersecurity. No prior experience required - just curiosity and willingness to learn!
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Reverse Engineering</span>
+                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm">Cryptography</span>
+                    <span class="px-3 py-1 bg-purple-500/10 text-purple-500 rounded-full text-sm">Web Exploitation</span>
+                    <span class="px-3 py-1 bg-pink-500/10 text-pink-500 rounded-full text-sm">Forensics</span>
+                    <span class="px-3 py-1 bg-blue-500/10 text-blue-500 rounded-full text-sm">Binary Exploitation</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="#" class="inline-flex items-center px-6 py-3 border border-secondary rounded-md text-white font-medium hover:bg-secondary/10 transition duration-300">
+                View Our CTF Writeups
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Minecraft Education Section -->
+    <section id="minecraft" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gray-900/50 rounded-3xl my-10">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    <span class="gradient-text">Minecraft Education</span> Initiative
+                </h2>
+                <p class="text-gray-300 mb-6">
+                    Our innovative program uses Minecraft: Education Edition to teach programming concepts, problem-solving, and teamwork to students of all ages.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="h-5 w-5 rounded-full bg-secondary/20 flex items-center justify-center">
+                                <i class="fas fa-check text-secondary text-xs"></i>
+                            </div>
+                        </div>
+                        <p class="ml-3 text-gray-300">Learn Python and JavaScript through in-game coding</p>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="h-5 w-5 rounded-full bg-secondary/20 flex items-center justify-center">
+                                <i class="fas fa-check text-secondary text-xs"></i>
+                            </div>
+                        </div>
+                        <p class="ml-3 text-gray-300">Develop logical thinking and computational skills</p>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="h-5 w-5 rounded-full bg-secondary/20 flex items-center justify-center">
+                                <i class="fas fa-check text-secondary text-xs"></i>
+                            </div>
+                        </div>
+                        <p class="ml-3 text-gray-300">Collaborative projects that teach teamwork and communication</p>
+                    </div>
+                </div>
+                <a href="#" class="mt-6 inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-md text-white font-medium hover:opacity-90 transition duration-300">
+                    Learn More
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            <div class="md:w-1/2 relative">
+                <div class="rounded-xl overflow-hidden border-2 border-gray-700 glow-effect">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <img src="https://images.unsplash.com/photo-1627855437693-dcc7b0c4ba5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Minecraft Education" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <h3 class="text-xl font-bold text-white">Building the Future Through Play</h3>
+                    </div>
+                </div>
+                <div class="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-primary/20 blur-2xl"></div>
+                <div class="absolute -bottom-6 -left-6 w-32 h-32 rounded-full bg-secondary/20 blur-2xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">Latest From Our Blog</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                Insights, tutorials, and stories from our team members and community.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Blog Post 1 -->
+            <div class="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 card-hover">
+                <div class="aspect-w-16 aspect-h-9">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Blog Post" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center text-sm text-gray-400 mb-3">
+                        <span>June 15, 2023</span>
+                        <span class="mx-2">•</span>
+                        <span>5 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Getting Started with Reverse Engineering</h3>
+                    <p class="text-gray-300 mb-4">
+                        A beginner's guide to understanding and approaching reverse engineering challenges in CTFs.
+                    </p>
+                    <a href="#" class="text-secondary font-medium inline-flex items-center">
+                        Read More
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Blog Post 2 -->
+            <div class="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 card-hover">
+                <div class="aspect-w-16 aspect-h-9">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" 
+                         alt="Blog Post" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center text-sm text-gray-400 mb-3">
+                        <span>May 28, 2023</span>
+                        <span class="mx-2">•</span>
+                        <span>8 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Teaching Python Through Minecraft</h3>
+                    <p class="text-gray-300 mb-4">
+                        How we've successfully engaged students in programming by combining Python with Minecraft Education.
+                    </p>
+                    <a href="#" class="text-secondary font-medium inline-flex items-center">
+                        Read More
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Blog Post 3 -->
+            <div class="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 card-hover">
+                <div class="aspect-w-16 aspect-h-9">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1465&q=80" 
+                         alt="Blog Post" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center text-sm text-gray-400 mb-3">
+                        <span>April 10, 2023</span>
+                        <span class="mx-2">•</span>
+                        <span>12 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Building a Cybersecurity Community</h3>
+                    <p class="text-gray-300 mb-4">
+                        Lessons learned from creating and growing an inclusive cybersecurity learning community.
+                    </p>
+                    <a href="#" class="text-secondary font-medium inline-flex items-center">
+                        Read More
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="#" class="inline-flex items-center px-6 py-3 border border-secondary rounded-md text-white font-medium hover:bg-secondary/10 transition duration-300">
+                View All Blog Posts
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="bg-gradient-to-br from-dark to-gray-900 rounded-2xl border border-gray-800 overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+                <div class="p-10 lg:p-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        <span class="gradient-text">Get In Touch</span>
+                    </h2>
+                    <p class="text-gray-300 mb-8">
+                        Interested in joining our team, collaborating on a project, or learning more about our initiatives? Reach out to us!
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-sm font-medium text-gray-400">Email</h3>
+                                <p class="text-white">contact@primordium.team</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="h-10 w-10 rounded-full bg-secondary/10 flex items-center justify-center">
+                                    <i class="fab fa-discord text-secondary"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-sm font-medium text-gray-400">Discord</h3>
+                                <p class="text-white">primordium.team/discord</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="h-10 w-10 rounded-full bg-purple-500/10 flex items-center justify-center">
+                                    <i class="fab fa-twitter text-purple-500"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-sm font-medium text-gray-400">Twitter</h3>
+                                <p class="text-white">@PrimordiumTeam</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800/50 p-10 lg:p-12 border-t lg:border-t-0 lg:border-l border-gray-800">
+                    <form>
+                        <div class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                                <input type="text" id="name" name="name" 
+                                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent" 
+                                       placeholder="Your name">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                                <input type="email" id="email" name="email" 
+                                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent" 
+                                       placeholder="your@email.com">
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Subject</label>
+                                <select id="subject" name="subject" 
+                                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent">
+                                    <option value="">Select a subject</option>
+                                    <option value="ctf">CTF Team Inquiry</option>
+                                    <option value="minecraft">Minecraft Education</option>
+                                    <option value="collaboration">Collaboration</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                                <textarea id="message" name="message" rows="4" 
+                                          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent" 
+                                          placeholder="Your message..."></textarea>
+                            </div>
+                            
+                            <div>
+                                <button type="submit" 
+                                        class="w-full px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-md text-white font-medium hover:opacity-90 transition duration-300">
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/80 border-t border-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center">
+                        <div class="hexagon w-10 h-10 bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">P</span>
+                        </div>
+                        <span class="ml-3 text-xl font-bold gradient-text">Primordium</span>
+                    </div>
+                    <p class="mt-4 text-gray-400">
+                        Empowering through cybersecurity education and creative technology.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-medium mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition duration-300">About</a></li>
+                        <li><a href="#ctf" class="text-gray-400 hover:text-white transition duration-300">CTF Team</a></li>
+                        <li><a href="#minecraft" class="text-gray-400 hover:text-white transition duration-300">Minecraft</a></li>
+                        <li><a href="#blog" class="text-gray-400 hover:text-white transition duration-300">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-medium mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">CTF Writeups</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Learning Materials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Minecraft Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Community Forum</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-medium mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition duration-300">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition duration-300">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-gray-400">Subscribe to our newsletter</p>
+                        <div class="mt-2 flex">
+                            <input type="email" placeholder="Your email" 
+                                   class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-md text-white focus:outline-none focus:ring-1 focus:ring-secondary w-full">
+                            <button class="px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-r-md hover:opacity-90 transition duration-300">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm">
+                    &copy; 2023 Primordium Digital Intelligence Team. All rights reserved.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm transition duration-300">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm transition duration-300">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm transition duration-300">Code of Conduct</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    // Scroll to target
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add animation class when elements come into view
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card-hover').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
